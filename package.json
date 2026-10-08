@@ -1,23 +1,14 @@
 {
-  "name": "react-native-svga",
-  "title": "React Native Svga",
-  "version": "1.0.9",
+  "name": "@react-native-ohos/react-native-svga",
+  "displayName": "react-native-svga",
+  "version": "1.0.9-rc.1",
   "description": "react-native 中使用 SVGA",
-  "main": "index.js",
-  "files": [
-    "README.md",
-    "android",
-    "index.js",
-    "index.d.ts",
-    "ios",
-    "react-native-svga.podspec"
-  ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bugs": {
-    "url": "https://github.com/Smallworld-P/react-native-svga/issues"
-  },
+  "main": "./dist/commonjs/index.js",
+  "module": "./dist/module/index.js",
+  "react-native": "./src/index.tsx",
+  "types": "./dist/typescript/index.d.ts",
+  "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Smallworld-P/react-native-svga.git",
@@ -25,32 +16,69 @@
   },
   "keywords": [
     "react-native",
-    "svga"
+    "harmony",
+    "harmonyos"
   ],
-  "author": {
-    "name": "xsj",
-    "email": "1045252343@qq.com"
+  "homepage": "https://github.com/Smallworld-P/react-native-svga",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
-  "contributors": [
-    {
-      "name": "san_mu",
-      "email": "jedshim@163.com"
-    },
-    {
-      "name": "yuanaxun",
-      "email": "yuanaxun@hotmail.com"
-    }
+  "files": [
+    "dist/",
+    "src/",
+    "harmony/",
+    "README.md",
+    "LICENSE"
   ],
-
-  "license": "MIT",
-  "licenseFilename": "LICENSE",
-  "readmeFilename": "README.md",
+  "scripts": {
+    "prepare": "tsc --noEmit && bob build",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "codegen-lib": "react-native codegen-harmony --cpp-output-path ./harmony/svga/src/main/cpp/generated --ets-output-path ./harmony/svga/src/main/ets/generated"
+  },
   "peerDependencies": {
-    "react": "^16.8.1",
-    "react-native": ">=0.60.0-rc.0 <1.0.x"
+    "react-native": ">=0.72"
   },
   "devDependencies": {
-    "react": "^16.9.0",
-    "react-native": "^0.61.5"
+    "@react-native-oh/react-native-harmony-cli": "^0.77.50",
+    "@react-native/typescript-config": "0.79.5",
+    "@types/jest": "^30.0.0",
+    "@types/react": "18.2.79",
+    "jest": "^29.6.3",
+    "metro": "^0.81.0",
+    "react": "18.2.0",
+    "react-native": "0.72.5",
+    "react-native-builder-bob": "^0.18.0",
+    "ts-jest": "^29.4.12",
+    "typescript": "5.0.4"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "harmony": {
+    "alias": "react-native-svga",
+    "autolinking": {
+      "cmakeLibraryTargetName": "svga",
+      "ohPackageName": "@react-native-ohos/react-native-svga",
+      "etsPackageClassName": "SvgaPackage",
+      "cppPackageClassName": "SvgaPackage"
+    },
+    "codegenConfig": [
+      {
+        "version": 1,
+        "specPaths": [
+          "./src/specs/v1"
+        ]
+      }
+    ]
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "dist",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
   }
 }
